@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { graphql } from 'react-apollo';
 import gql from 'graphql-tag';
 import { Link, hashHistory } from 'react-router';
+import query from '../queries/fetchSongs';
 
 class SongCreate extends Component {
   constructor(props) {
@@ -16,7 +17,9 @@ class SongCreate extends Component {
       .mutate({
         variables: {
           title: this.state.title
-        }
+        },
+        refetchQueries: [{ query: query }]
+        //we can also pass in variables here to refetchQueries
       })
       .then(() => hashHistory.push('/'))
       .catch(() => console.log('mutate failed'));
