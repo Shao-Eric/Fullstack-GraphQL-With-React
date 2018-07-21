@@ -9,7 +9,10 @@ import SongList from './components/SongList';
 import SongCreate from './components/SongCreate';
 import SongDetail from './components/SongDetail';
 
-const client = new ApolloClient({});
+const client = new ApolloClient({
+  dataIdFromObject: o => o.id
+}); // o = object, id helps apollo identify each piece of data fetched
+// this only works when all the id are unique.
 
 const Root = () => {
   return (
